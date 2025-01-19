@@ -1,0 +1,38 @@
+<form>
+    <label for="browser">Choose a browser:</label>
+    <input list="browsers" name="browser" id="browser" placeholder="Select a browser" required>
+    <datalist id="browsers">
+      <option value="Google Chrome">Chrome</option>
+      <option value="Mozilla Firefox">Firefox</option>
+      <option value="Microsoft Edge">Edge</option>
+      <option value="Safari">Safari</option>
+    </datalist>
+    <button type="submit">Submit</button>
+  </form>
+  
+  <script>
+    const input = document.getElementById("browser");
+    const validOptions = ["Google Chrome", "Mozilla Firefox", "Microsoft Edge", "Safari"];
+  
+    // Validate on blur (when the user clicks outside the field)
+    input.addEventListener("blur", () => {
+      if (!validOptions.includes(input.value)) {
+        input.setCustomValidity("Please select a valid browser from the list.");
+      } else {
+        input.setCustomValidity(""); // Clear the error if valid
+      }
+      input.reportValidity(); // Show the validation message immediately
+    });
+  
+    // Optional: Validate on form submission
+    document.querySelector("form").addEventListener("submit", (event) => {
+      if (!validOptions.includes(input.value)) {
+        event.preventDefault(); // Prevent form submission
+        input.setCustomValidity("Please select a valid browser from the list.");
+        input.reportValidity(); // Show the validation message
+      } else {
+        input.setCustomValidity(""); // Clear the error
+      }
+    });
+  </script>
+  
